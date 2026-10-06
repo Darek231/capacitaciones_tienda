@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        {% if compra %}
+            <h2>Editar Compra</h2>
+        {% else %}
+            <h2>Agregar Compra</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST"
+              action="{% if compra %}{{ url_for('editar_compra', id=compra.id) }}{% else %}{{ url_for('agregar_compra') }}{% endif %}">
+
+            <div class="mb-3">
+
+                <label for="cliente_id" class="form-label">
+                    Cliente
+                </label>
+
+                <select class="form-select"
+                        id="cliente_id"
+                        name="cliente_id"
+                        required>
+
+                    <option value="">
+                        Seleccione un cliente
+                    </option>
+
+                    {% for cliente in clientes %}
+
+                    <option value="{{ cliente.id }}"
+                        {% if compra and compra.cliente_id == cliente.id %}
+                            selected
+                        {% endif %}>
+
+                        {{ cliente.nombre }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label for="categoria_id" class="form-label">
+                    Categoría
+                </label>
+
+                <select class="form-select"
+                        id="categoria_id"
+                        name="categoria_id"
+                        required>
+
+                    <option value="">
+                        Seleccione una categoría
+                    </option>
+
+                    {% for categoria in categorias %}
+
+                    <option value="{{ categoria.id }}"
+                        {% if compra and compra.categoria_id == categoria.id %}
+                            selected
+                        {% endif %}>
+
+                        {{ categoria.nombre }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <label for="fecha" class="form-label">
+                    Fecha
+                </label>
+
+                <input type="date"
+                       class="form-control"
+                       id="fecha"
+                       name="fecha"
+                       value="{{ compra.fecha if compra else '' }}"
+                       required>
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">
+
+                {% if compra %}
+                    Guardar cambios
+                {% else %}
+                    Agregar
+                {% endif %}
+
+            </button>
+
+            <a href="{{ url_for('compras') }}"
+               class="btn btn-secondary">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -19,8 +19,8 @@
       <td>{{ categoria.nombre }}</td>
 
       <td>
-        <a href="#" class="btn btn-primary btn-sm">Editar</a>
-        <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+        <a href="{{ url_for('editar_categoria', id=categoria.id) }}" class="btn btn-primary btn-sm">Editar</a>
+        <a href="{{ url_for('eliminar_categoria', id=categoria.id) }}" class="btn btn-danger btn-sm">Eliminar</a>
       </td>
     </tr>
     {% endfor %}

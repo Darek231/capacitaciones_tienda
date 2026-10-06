@@ -1,11 +1,58 @@
-<form action="{{ url_for('agregar_categoria') }}" method="POST">
+{% extends 'base.html' %}
 
-    <label>Nombre de categoría:</label>
+{% block content %}
 
-    <input type="text" name="nombre" required>
+<div class="card">
 
-    <button type="submit">
-        Guardar
-    </button>
+    <div class="card-header">
 
-</form>
+        {% if categoria %}
+            <h2>Editar Categoría</h2>
+        {% else %}
+            <h2>Agregar Categoría</h2>
+        {% endif %}
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST"
+              action="{% if categoria %}{{ url_for('editar_categoria', id=categoria.id) }}{% else %}{{ url_for('agregar_categoria') }}{% endif %}">
+
+            <div class="mb-3">
+
+                <label for="nombre" class="form-label">
+                    Nombre de la Categoría
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       id="nombre"
+                       name="nombre"
+                       value="{{ categoria.nombre if categoria else '' }}"
+                       required>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+
+                {% if categoria %}
+                    Guardar cambios
+                {% else %}
+                    Agregar
+                {% endif %}
+
+            </button>
+
+            <a href="{{ url_for('categoria') }}"
+               class="btn btn-secondary">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
