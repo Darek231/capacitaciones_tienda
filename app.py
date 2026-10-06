@@ -16,7 +16,7 @@ def index():
     return redirect(url_for('clientes'))
 
 
-# CLIENTES
+
 
 @app.route('/clientes')
 def clientes():
@@ -119,7 +119,6 @@ def eliminar_cliente(id):
     return redirect(url_for('clientes'))
 
 
-# CATEGORIAS
 
 @app.route('/categoria')
 def categoria():
@@ -221,7 +220,6 @@ def eliminar_categoria(id):
     return redirect(url_for('categoria'))
 
 
-# COMPRAS
 
 @app.route('/compras')
 def compras():

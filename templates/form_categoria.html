@@ -17,7 +17,7 @@
     <div class="card-body">
 
         <form method="POST"
-              action="{% if categoria %}{{ url_for('editar_categoria', id=categoria.id) }}{% else %}{{ url_for('agregar_categoria') }}{% endif %}">
+            action="{% if categoria %}{{ url_for('editar_categoria', id=categoria.id) }}{% else %}{{ url_for('agregar_categoria') }}{% endif %}">
 
             <div class="mb-3">
 
