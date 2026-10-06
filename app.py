@@ -33,6 +33,16 @@ def categoria():
     conn.close()
 
     return render_template('categoria.html', categorias=categorias)
+@app.route('/categoria/nueva', methods=['POST', 'GET'])
+def agregar_categoria():
+    from flask import request
+    nombre = request.form['nombre']
+    conn = get_db_connection()
+    conn.execute('INSERT INTO categoria (nombre) VALUES (?)', (nombre,))
+    conn.commit()
+    conn.close()
+    return render_template('categoria.html', categorias=[])
+
 
 
 @app.route('/compras')
@@ -55,15 +65,6 @@ def compras():
     conn.close()
 
     return render_template('compras.html', compras=compras)
-@app.route('/agregar_categoria', methods=['POST'])
-def agregar_categoria():
-    from flask import request
-    nombre = request.form['nombre']
-    conn = get_db_connection()
-    conn.execute('INSERT INTO categoria (nombre) VALUES (?)', (nombre,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for('categoria'))
 
 
 if __name__ == '__main__':
